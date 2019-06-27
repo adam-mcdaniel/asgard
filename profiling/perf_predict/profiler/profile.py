@@ -1,7 +1,7 @@
 from tqdm import tqdm
 from spreadsheet import TimeSheet, MemorySheet
 from regression import Function
-from massif import get_mem_usage
+from gperf import get_mem_usage
 from timer import get_time
 from options import LEVELS, DEGREES, PDE
 
