@@ -35,7 +35,7 @@ def run_gperf(level, degree, pde, gperf_output, asgard_output):
         content = f.write(content)
         f.close()
 
-    for hprof in glob('asgard.hprof.*')[1:]:
+    for hprof in glob('asgard.hprof.*'):
         system(f"rm {hprof}")
 
 

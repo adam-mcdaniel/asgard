@@ -10,7 +10,7 @@ std::pair<std::string, double> continuity_1_MB(int level, int degree)
     // return a * pow(degree, 2) + b * degree + c;
 
     return std::make_pair(
-        "(Predicted for 4cf2e030fd1a2431953f590f38e4fee9afbca01d on Fri Jun 28 09:32:33 2019 -0400s)",
+        "(Predicted for e36524bf4cb77630c6925ce1eafe4b50a146422c on Fri Jun 28 10:04:22 2019 -0400s)",
         a * pow(degree, 2) + b * degree + c
     );
 }
