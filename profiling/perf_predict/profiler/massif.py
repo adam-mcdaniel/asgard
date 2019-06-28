@@ -12,17 +12,18 @@ def bytes_to_megabytes(b): return int(b) / 10**6
 # Runs massif on the commandline to generate output files for profiling
 def run_massif(level, degree, pde, massif_output, asgard_output):
     with open(f'{asgard_output}', 'w') as output_file:
-        check_call([
-            'valgrind',
-            '--tool=massif',
-            f'--massif-out-file={massif_output}',
-            f'{ASGARD_PATH}',
-            '-l', f'{level}',
-            '-d', f'{degree}',
-            '-p', f'{pde}'
-        ], stdout=output_file, stderr=STDOUT)
-        output_file.close()
-
+        try:
+            check_call([
+                'valgrind',
+                '--tool=massif',
+                f'--massif-out-file={massif_output}',
+                f'{ASGARD_PATH}',
+                '-l', f'{level}',
+                '-d', f'{degree}',
+                '-p', f'{pde}'
+            ], stdout=output_file, stderr=output_file, shell=True)
+            output_file.close()
+        except: pass
 
 # Gets the workspace mem usage and total mem usage for asgard
 def get_mem_usage(level, degree, pde):

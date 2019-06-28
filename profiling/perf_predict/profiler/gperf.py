@@ -2,6 +2,7 @@ from functools import reduce
 from subprocess import check_call, STDOUT, DEVNULL
 from sys import argv
 from os import system
+from glob import glob
 from os.path import isfile, dirname
 from options import DATA_FILE_DIR, ASGARD_PATH, USE_OLD_DATA, LEVELS, DEGREES
 
@@ -11,16 +12,17 @@ def bytes_to_megabytes(b): return int(b) / 10**6
 
 
 # Runs gperf on the commandline to generate output files for profiling
-def run_gperf(level, degree, pde, massif_output, asgard_output):
+def run_gperf(level, degree, pde, gperf_output, asgard_output):
     system(f"HEAPPROFILE=asgard.hprof {ASGARD_PATH} -p {pde} -l {level} -d {degree} > {asgard_output}")
-    with open(f"{dirname(ASGARD_PATH)}/asgard.hprof.0001.heap", 'r') as f:
+    with open(f"{glob('asgard.hprof.*')[-1]}", 'r') as f:
         content = f.read()
         f.close()
-    with open(f"{massif_output}", 'w') as f:
+    with open(f"{gperf_output}", 'w') as f:
         content = f.write(content)
         f.close()
-    system("rm asgard.hprof.0001.heap")
 
+    for hprof in glob('asgard.hprof.*')[1:]:
+        system(f"rm {hprof}")
 
 
 # Gets the workspace mem usage and total mem usage for asgard
@@ -42,9 +44,8 @@ def get_mem_usage(level, degree, pde):
     # A struct containing the workspace and total mem usage for asgard
     return total_mem_usage
 
-# Used to read the massif output file from running asgard
 
-
+# Used to read the gperf output file from running asgard
 class GPerfReader:
     def __init__(self, filename=None):
         self.filename = filename
@@ -60,6 +61,6 @@ class GPerfReader:
     def get_peak(self):
         if len(self.lines) > 0:
             line = self.lines[0]
-            return int(line.split()[3])
+            return int(bytes_to_megabytes(line.split(']')[0].split(':')[-1].strip()))
         raise Exception(
-            f"No peak found in massif output file '{self.filename}'")
+            f"No peak found in gperf output file '{self.filename}'")

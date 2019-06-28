@@ -26,12 +26,12 @@ config = Config(
     dictionary={
         'continuity_1': {
             'time': {
-                'lmax': 6,
+                'lmax': 8,
                 'dmax': 6,
                 'od': 7,
             },
             'mem': {
-                'lmax': 6,
+                'lmax': 8,
                 'dmax': 6,
                 'od': 7,
             }

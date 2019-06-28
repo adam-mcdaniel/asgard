@@ -8,16 +8,16 @@ from options import DATA_FILE_DIR, ASGARD_PATH, USE_OLD_DATA
 
 # Runs `time` on the commandline to get time
 def run_time(level, degree, pde, time_output):
-    # with open(f'{time_output}', 'w') as output_file:
-    #     check_call([
-    #         'time',
-    #         f'{ASGARD_PATH}',
-    #         '-l', f'{level}',
-    #         '-d', f'{degree}',
-    #         '-p', f'{pde}'
-    #     ], stdout=output_file, stderr=STDOUT)
-    #     output_file.close()
-    system(f"(time {ASGARD_PATH} -l {level} -d {degree} -p {pde}) > {time_output}")
+    with open(f'{time_output}', 'w') as output_file:
+        check_call([
+            'time',
+            f'{ASGARD_PATH}',
+            '-l', f'{level}',
+            '-d', f'{degree}',
+            '-p', f'{pde}'
+        ], stdout=output_file, stderr=output_file, shell=True)
+        output_file.close()
+    # system(f"(time {ASGARD_PATH} -l {level} -d {degree} -p {pde}) > {time_output}")
 
 
 # Gets the actual compute time in seconds from asgard
