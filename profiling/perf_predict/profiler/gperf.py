@@ -1,5 +1,5 @@
 from functools import reduce
-from subprocess import check_call, STDOUT, DEVNULL
+from subprocess import check_call, STDOUT, DEVNULL, call
 from sys import argv
 from os import system
 from glob import glob
@@ -13,7 +13,21 @@ def bytes_to_megabytes(b): return int(b) / 10**6
 
 # Runs gperf on the commandline to generate output files for profiling
 def run_gperf(level, degree, pde, gperf_output, asgard_output):
-    system(f"HEAPPROFILE=asgard.hprof {ASGARD_PATH} -p {pde} -l {level} -d {degree} > {asgard_output}")
+    # check_call(
+    #     f"{ASGARD_PATH} -p {pde} -l {level} -d {degree} > {asgard_output}")
+
+    with open(f'{asgard_output}', 'w') as output_file:
+        try:
+            check_call([
+                f'{ASGARD_PATH}',
+                '-l', f'{level}',
+                '-d', f'{degree}',
+                '-p', f'{pde}'
+            ], stdout=output_file, stderr=output_file, shell=True, env={'HEAPPROFILE': 'asgard.hprof'})
+            output_file.close()
+        except:
+            pass
+
     with open(f"{glob('asgard.hprof.*')[-1]}", 'r') as f:
         content = f.read()
         f.close()

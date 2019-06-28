@@ -15,7 +15,7 @@ def run_time(level, degree, pde, time_output):
             '-l', f'{level}',
             '-d', f'{degree}',
             '-p', f'{pde}'
-        ], stdout=output_file, stderr=output_file, shell=True)
+        ], stdout=output_file, stderr=output_file)
         output_file.close()
     # system(f"(time {ASGARD_PATH} -l {level} -d {degree} -p {pde}) > {time_output}")
 

@@ -19,9 +19,9 @@ for pde in PDEs:
     system(rf'python {PROFILER}/main.py -a {ASGARD_PATH} -p {pde} -lmax {config[pde]["mem"]["lmax"]} -dmax {config[pde]["mem"]["dmax"]} -od {config[pde]["time"]["od"]} {GRAPHING} --data-dir {HOME}/internal_data -o {HOME}/output {CLEANING}'
            )
 
-    # # Profile time
-    # system(
-    #     rf'python {PROFILER}/main.py -a {ASGARD_PATH} -t -p {pde} -lmax {config[pde]["time"]["lmax"]} -dmax {config[pde]["time"]["dmax"]} -od {config[pde]["time"]["od"]} {GRAPHING} --data-dir {HOME}/internal_data -o {HOME}/output {CLEANING}')
+    # Profile time
+    system(
+        rf'python {PROFILER}/main.py -a {ASGARD_PATH} -t -p {pde} -lmax {config[pde]["time"]["lmax"]} -dmax {config[pde]["time"]["dmax"]} -od {config[pde]["time"]["od"]} {GRAPHING} --data-dir {HOME}/internal_data -o {HOME}/output {CLEANING}')
 
 system(
     rf'python {BUILDER}/main.py -m {HOME}/output/mem_pred -t {HOME}/output/time_pred -o {OUTPUT_DIR}')
