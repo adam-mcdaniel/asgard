@@ -3,14 +3,14 @@ std::pair<std::string, double> continuity_1_MB(int level, int degree)
     level -= 1;
     degree -= 2;
 
-    double a = 1.723216780481756e-15 * pow(level, 0) + -3.721070445873867e-30 * pow(level, 1) + 5.2943997329371216e-30 * pow(level, 2) + -3.3538431132029754e-30 * pow(level, 3) + 1.1458188012960076e-30 * pow(level, 4) + -2.173981939902864e-31 * pow(level, 5) + 2.1549871456723113e-32 * pow(level, 6) + -8.695226987772814e-34 * pow(level, 7);
-    double b = -1.5567211377889586e-14 * pow(level, 0) + -2.3534833010409408e-29 * pow(level, 1) + 2.987878590942589e-29 * pow(level, 2) + -1.8275256728734803e-29 * pow(level, 3) + 6.397831667728237e-30 * pow(level, 4) + -1.2663300636675568e-30 * pow(level, 5) + 1.2853875414869416e-31 * pow(level, 6) + -5.128058875681482e-33 * pow(level, 7);
-    double c = 111.00000000000003 * pow(level, 0) + -5.2725499390621e-13 * pow(level, 1) + 1.0584685100344708e-12 * pow(level, 2) + -8.13144226418498e-13 * pow(level, 3) + 3.089991620474767e-13 * pow(level, 4) + -6.189393570649567e-14 * pow(level, 5) + 6.2561015066003745e-15 * pow(level, 6) + -2.5129409084378203e-16 * pow(level, 7);
+    double a = 2.3624668436557314e-18 * pow(level, 0) + -5.0947256857088135e-33 * pow(level, 1) + 1.2438181357129858e-32 * pow(level, 2) + -1.0328242347003378e-32 * pow(level, 3) + 4.068119815536962e-33 * pow(level, 4) + -8.281375456266318e-34 * pow(level, 5) + 8.436031976036194e-35 * pow(level, 6) + -3.409460385412153e-36 * pow(level, 7);
+    double b = 2.533725810203384e-18 * pow(level, 0) + 3.4303943714477074e-33 * pow(level, 1) + -5.155525836224445e-33 * pow(level, 2) + 3.859861246024403e-33 * pow(level, 3) + -1.5879966167580422e-33 * pow(level, 4) + 3.57254575253434e-34 * pow(level, 5) + -4.0477496684330553e-35 * pow(level, 6) + 1.786792246451683e-36 * pow(level, 7);
+    double c = 0.07483999999999999 * pow(level, 0) + 1.618584254855161e-16 * pow(level, 1) + -3.4939891503692383e-16 * pow(level, 2) + 2.6775400236209216e-16 * pow(level, 3) + -1.0230701637316097e-16 * pow(level, 4) + 2.078035741085156e-17 * pow(level, 5) + -2.132170577214802e-18 * pow(level, 6) + 8.667677436490747e-20 * pow(level, 7);
 
     // return a * pow(degree, 2) + b * degree + c;
 
     return std::make_pair(
-        "(Predicted for e36524bf4cb77630c6925ce1eafe4b50a146422c on Fri Jun 28 10:04:22 2019 -0400s)",
+        "(Predicted for ad99a1d84abe38598e498b63f17f9ed047d2aa7b on Fri Jun 28 10:22:38 2019 -0400s)",
         a * pow(degree, 2) + b * degree + c
     );
 }
